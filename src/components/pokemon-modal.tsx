@@ -554,9 +554,9 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="flex-1 overflow-y-auto max-h-[50vh] md:max-h-none"
+                    className="flex-1 overflow-y-auto max-h-[50vh] md:max-h-none px-4"
                   >
-                    <h4 className="text-white font-bold text-lg md:text-xl mb-4">
+                    <h4 className="text-white font-bold text-lg md:text-xl mb-4 ">
                       Evolution Chain
                     </h4>
                     {loading ? (
@@ -578,7 +578,7 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
                     ) : (
                       <div className=" pb-2">
                         <motion.div
-                          className="flex items-center justify-start md:justify-center flex-col "
+                          className="flex items-center justify-start md:justify-center "
                           variants={staggerChildren}
                           initial="hidden"
                           animate="visible"
@@ -588,7 +588,7 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
                               <motion.div
                                 className={`grid  ${
                                   column.length > 1
-                                    ? "grid-cols-3 md:grid-cols-4 gap-4 mt-3 items-center"
+                                    ? "grid-cols-2 md:grid-cols-3 gap-4 mt-3 items-center"
                                     : ""
                                 } `}
                                 variants={slideUpAnimation}
