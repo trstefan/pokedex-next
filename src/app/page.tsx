@@ -157,6 +157,33 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-16 bg-background">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-8 md:grid-cols-3">
+            {[
+              { number: "898+", label: "Pokémon Species" },
+              { number: "18", label: "Pokémon Types" },
+              { number: "8", label: "Generations" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-muted-foreground">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Showcase Section */}
       <section
         ref={showcaseRef}
@@ -190,39 +217,6 @@ export default function LandingPage() {
                   From the original 151 to the latest generation, our Pokédex
                   has detailed information on every Pokémon ever created.
                 </p>
-                <ul className="space-y-4">
-                  {[
-                    "Complete evolution chains and methods",
-                    "Type matchups and weaknesses",
-                    "Abilities, moves, and stats",
-                    "Locations and how to obtain",
-                  ].map((item, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={
-                        showcaseInView
-                          ? { opacity: 1, x: 0 }
-                          : { opacity: 0, x: -20 }
-                      }
-                      transition={{ duration: 0.3, delay: 0.7 + i * 0.1 }}
-                      className="flex items-center"
-                    >
-                      <div className="mr-3 rounded-full bg-primary/10 p-1">
-                        <Star className="h-5 w-5 text-primary" />
-                      </div>
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-                <div className="pt-2">
-                  <Link href="/explore">
-                    <Button className="rounded-full group">
-                      Start Exploring
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                </div>
               </div>
             </motion.div>
 
@@ -297,33 +291,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-background">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              { number: "898+", label: "Pokémon Species" },
-              { number: "18", label: "Pokémon Types" },
-              { number: "8", label: "Generations" },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section
         ref={ctaRef}
@@ -363,19 +330,13 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-background border-t">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <div className="flex items-center mb-4 sm:mb-0">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                <div className="w-6 h-6 rounded-full bg-primary"></div>
-              </div>
-              <span className="font-bold text-lg">Pokédext</span>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Pokédext. All rights reserved.
-            </div>
-          </div>
+      <footer className="bg-white border-t border-gray-200 py-6 font-semibold">
+        <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
+          <p> {new Date().getFullYear()} &copy; Stefan Traciu</p>
+          <p className="mt-2">
+            Made with <span className="text-red-500">❤</span> for Pokémon fans
+            everywhere
+          </p>
         </div>
       </footer>
     </div>
