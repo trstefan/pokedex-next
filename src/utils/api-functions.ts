@@ -13,10 +13,10 @@ export const getPokemonList = async (url: string): Promise<PokemonBasic[]> => {
 
   const data: PokemonListResponse = await response.json();
 
-  return data.results.map((pokemon) => {
-    const { id, ...rest } = pokemon;
-    return { id: getPokemonIdFromUrl(pokemon.url), ...rest };
-  });
+  return data.results.map((pokemon) => ({
+    ...pokemon,
+    id: getPokemonIdFromUrl(pokemon.url),
+  }));
 };
 
 export const getPokemonDetails = async (
@@ -33,9 +33,14 @@ export const getPokemonDetails = async (
 
 export const getPokemonIdFromUrl = (url: string): string => {
   const urlSegments = url.split("/");
-  // Handle trailing backslash
+  // Handle trailing slash
   const pokemonId = urlSegments.pop() || urlSegments.pop();
   return pokemonId || "";
+};
+
+type EvolutionNode = {
+  species: { url: string };
+  evolves_to: EvolutionNode[];
 };
 
 export const getPokemonEvolution = async (url: string): Promise<string[][]> => {
@@ -49,13 +54,10 @@ export const getPokemonEvolution = async (url: string): Promise<string[][]> => {
 
   const evoData = await response.json();
 
-  // BFS of evolution tree
-  const searchEvolutionTree = (node: any, level: number): void => {
-    if (evolutions[level] === undefined) evolutions[level] = [];
+  const searchEvolutionTree = (node: EvolutionNode, level: number): void => {
+    if (!evolutions[level]) evolutions[level] = [];
     evolutions[level].push(getPokemonIdFromUrl(node.species.url));
-    node.evolves_to.forEach((child: any) =>
-      searchEvolutionTree(child, level + 1)
-    );
+    node.evolves_to.forEach((child) => searchEvolutionTree(child, level + 1));
   };
 
   searchEvolutionTree(evoData.chain, 0);
@@ -64,16 +66,12 @@ export const getPokemonEvolution = async (url: string): Promise<string[][]> => {
 };
 
 export const formatPokemonName = (name: string): string => {
-  // Capitalize each word and change gender letters to the appropriate symbol
   return name
     .toLowerCase()
     .split("-")
     .map((s) => {
-      if (s === "m") {
-        return "♂";
-      } else if (s === "f") {
-        return "♀";
-      }
+      if (s === "m") return "♂";
+      if (s === "f") return "♀";
       return s.charAt(0).toUpperCase() + s.substring(1);
     })
     .join(" ");
