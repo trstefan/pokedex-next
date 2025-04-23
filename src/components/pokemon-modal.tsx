@@ -107,7 +107,6 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
 
   const typeColorGradient = getColorGradient(pokemonDetails.types);
   const mainType = pokemonDetails.types[0]?.type.name || "normal";
-  const mainColor = COLOURS_PER_TYPE[mainType];
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -133,13 +132,14 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
   };
 
   // Type guard function
-  const isSpeciesInfo = (data: any): data is SpeciesInfo => {
+  const isSpeciesInfo = (data: unknown): data is SpeciesInfo => {
     return (
-      data &&
-      Array.isArray(data.genera) &&
-      Array.isArray(data.flavor_text_entries) &&
-      typeof data.evolution_chain === "object" &&
-      typeof data.evolution_chain.url === "string"
+      typeof data === "object" &&
+      data !== null &&
+      Array.isArray((data as any).genera) &&
+      Array.isArray((data as any).flavor_text_entries) &&
+      typeof (data as any).evolution_chain === "object" &&
+      typeof (data as any).evolution_chain.url === "string"
     );
   };
 
