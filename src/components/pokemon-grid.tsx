@@ -129,7 +129,7 @@ export default function ExplorerPage() {
         <Link href="/">
           <h1 className="text-4xl font-bold mb-2">PokéDext</h1>{" "}
         </Link>
-        <p className="text-xl italic">Gotta Catch 'Em All!</p>
+        <p className="text-xl italic">Gotta Catch `&apos;`Em All!</p>
       </motion.header>
 
       <div className="mb-6 flex items-center justify-between  flex-wrap gap-4">

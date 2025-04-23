@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Pokeball } from "./pokeball";
-import { Home, Search, Info, Github } from "lucide-react";
+import { Home, Search, Github } from "lucide-react";
 
 interface HeaderProps {
   activePage?: "home" | "explorer";

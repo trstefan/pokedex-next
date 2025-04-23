@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Search, Zap, Shield, Star } from "lucide-react";
+import { ArrowRight, Search, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
@@ -19,7 +19,6 @@ export default function LandingPage() {
   const showcaseInView = useInView(showcaseRef, { once: true, amount: 0.2 });
   const ctaInView = useInView(ctaRef, { once: true, amount: 0.5 });
 
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   const parallaxY = useTransform(scrollY, [0, 1000], [0, -150]);
 
   const features = [
@@ -35,13 +34,6 @@ export default function LandingPage() {
       description:
         "Explore comprehensive stats, abilities, and evolution chains.",
     },
-  ];
-
-  const popularPokemon = [
-    { id: 25, name: "Pikachu" },
-    { id: 6, name: "Charizard" },
-    { id: 150, name: "Mewtwo" },
-    { id: 149, name: "Dragonite" },
   ];
 
   return (
