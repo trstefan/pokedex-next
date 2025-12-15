@@ -19,6 +19,7 @@ import {
   pulseAnimation,
 } from "../utils/animations-utils";
 import { X, ChevronRight, Info, BarChart3, GitBranch } from "lucide-react";
+import Image from "next/image";
 
 interface PokemonModalProps {
   toggleModal: () => void;
@@ -643,7 +644,7 @@ export const PokemonModal: React.FC<PokemonModalProps> = ({
                                             animate={pulseAnimation}
                                           ></motion.div>
                                         )}
-                                        <img
+                                        <Image
                                           src={
                                             pokemon.sprites.other[
                                               "official-artwork"
